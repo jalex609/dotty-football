@@ -3,7 +3,7 @@ import javalib.impworld.*;
 import javalib.worldimages.*;
 import java.awt.Color;
 import tester.*;
-//TODO add kicking, fix extra distance bug, clean up code and test and find more bugs
+//add kicking, fix extra distance bug, clean up code and test and find more bugs
 
 
 // class representing the football field itself
@@ -186,12 +186,14 @@ class Field extends World {
 
   void resetAfterTD() {
     if (homepossesion) {
-      this.resetHomePosition();
-      this.info.fieldposition = 20;
-    }
-    else {
       this.resetAwayPosition();
       this.info.fieldposition = 20;
+      this.info.overhalfway = false;
+    }
+    else {
+      this.resetHomePosition();
+      this.info.fieldposition = 20;
+      this.info.overhalfway = false;
     }
   }
 
