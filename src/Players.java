@@ -3,6 +3,8 @@ import javalib.impworld.*;
 import javalib.worldimages.*;
 import java.awt.Color;
 import tester.*;
+//TODO add kicking, fix extra distance bug, clean up code and test and find more bugs
+
 
 // class representing the football field itself
 class Field extends World {
@@ -306,7 +308,7 @@ class ExamplesFootball {
 
   void testGame(Tester t) {
     this.initField();
-    f1.bigBang(9 * Field.IMG_SCALING, 4 * Field.IMG_SCALING, .1);
+    f1.bigBang(9 * Field.IMG_SCALING, 4 * Field.IMG_SCALING, .05);
 
   }
 

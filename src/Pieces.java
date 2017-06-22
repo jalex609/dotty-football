@@ -37,22 +37,23 @@ class Defense extends APlayer {
   }
 
   void move(Cell offensivePosition) {
-    if (offensivePosition.x > this.position.x && !this.position.right.occupied) {
+   double rand = Math.random();
+   if (offensivePosition.x > this.position.x && !this.position.right.occupied && rand <=.5) {
       this.position.occupied = false;
       this.position.right.occupied = true;
       this.position = this.position.right;
     }
-    else if (offensivePosition.x < this.position.x && !this.position.left.occupied) {
+    else if (offensivePosition.x < this.position.x && !this.position.left.occupied && rand <=.5) {
       this.position.occupied = false;
       this.position.left.occupied = true;
       this.position = this.position.left;
     }
-    else if (offensivePosition.y < this.position.y && !this.position.up.occupied) {
+    else if (offensivePosition.y < this.position.y && !this.position.up.occupied && rand > .5) {
       this.position.occupied = false;
       this.position.up.occupied = true;
       this.position = this.position.up;
     }
-    else if (offensivePosition.y > this.position.y && !this.position.down.occupied) {
+    else if (offensivePosition.y > this.position.y && !this.position.down.occupied && rand > .5) {
       this.position.occupied = false;
       this.position.down.occupied = true;
       this.position = this.position.down;
