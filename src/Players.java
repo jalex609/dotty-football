@@ -3,7 +3,7 @@ import javalib.impworld.*;
 import javalib.worldimages.*;
 import java.awt.Color;
 import tester.*;
-//TODO fix extra distance bug, clean up code and test and find more bugs
+//TODO Clean up and document code, test for additional bugs
 
 // class representing the football field itself
 class Field extends World {
@@ -96,10 +96,20 @@ class Field extends World {
     }
 
     for (Defense d : defenders) {
-      if (d.position.equals(player.position) && this.info.down == 4 && !this.firstDown) {
+      if (d.position.equals(player.position) && this.info.down == 4 && !this.firstDown
+          && !this.info.overhalfway) {
         this.homepossesion = !this.homepossesion;
         this.info.yardstogo = 10;
         this.firstDown = true;
+        this.info.overhalfway = true;
+        this.player.tackled = true;
+      }
+      else if (d.position.equals(player.position) && this.info.down == 4 && !this.firstDown
+          && this.info.overhalfway) {
+        this.homepossesion = !this.homepossesion;
+        this.info.yardstogo = 10;
+        this.firstDown = true;
+        this.info.overhalfway = false;
         this.player.tackled = true;
       }
       else if (d.position.equals(player.position)) {
@@ -213,7 +223,17 @@ class Field extends World {
         else {
           this.player.position = this.player.position.left;
         }
-
+        for (Defense d : defenders) {
+          if (this.player.position.equals(d.position)) {
+            this.info.yardstogo += 1;
+            if (this.info.overhalfway) {
+              this.info.fieldposition += 1;
+            }
+            else {
+              this.info.fieldposition -= 1;
+            }
+          }
+        }
         this.info.yardstogo -= 1;
         if (info.fieldposition == 50) {
           this.info.overhalfway = true;
@@ -230,12 +250,24 @@ class Field extends World {
     else if (key.equals("right")) {
       this.score.time -= 1;
       this.firstMove = true;
+
       if (homepossesion) {
         if (this.player.position.x == 8) {
           this.player.position = this.board.get(this.player.position.y).get(0);
         }
         else {
           this.player.position = this.player.position.right;
+        }
+        for (Defense d : defenders) {
+          if (this.player.position.equals(d.position)) {
+            this.info.yardstogo += 1;
+            if (this.info.overhalfway) {
+              this.info.fieldposition += 1;
+            }
+            else {
+              this.info.fieldposition -= 1;
+            }
+          }
         }
         this.info.yardstogo -= 1;
         if (info.fieldposition == 50) {
@@ -248,6 +280,7 @@ class Field extends World {
         else {
           this.info.fieldposition += 1;
         }
+
       }
     }
     else if (key.equals("up")) {
