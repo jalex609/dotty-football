@@ -7,6 +7,7 @@ import javalib.worldimages.RectangleImage;
 import javalib.worldimages.TextImage;
 import javalib.worldimages.WorldImage;
 
+//represents info about the game for the offense to know
 class Infoboard {
   Integer down;
   Integer fieldposition;
@@ -20,6 +21,7 @@ class Infoboard {
     this.overhalfway = false;
   }
 
+  //renders the board with the info about the game
   WorldImage render(boolean homePossesion) {
     String s = "";
     WorldImage down = new OverlayImage(
@@ -30,11 +32,11 @@ class Infoboard {
         new TextImage("Yards To Go: " + this.yardstogo.toString(), 10, Color.white),
         new RectangleImage(Field.IMG_SCALING, Field.IMG_SCALING, OutlineMode.SOLID, Color.black));
     if ((homePossesion && this.overhalfway) || (!homePossesion && !this.overhalfway)) {
-      s = " |-";
+      s = " |-"; // on right side of field
       
     }
     else if ((homePossesion && !this.overhalfway) || (!homePossesion && this.overhalfway)) {
-      s = " -|";
+      s = " -|"; //on left side of field
     }
     WorldImage fieldPosition = new OverlayImage(
         new TextImage("Field Position: " + this.fieldposition.toString() + s, 10, Color.white),
@@ -44,6 +46,7 @@ class Infoboard {
   }
 }
 
+//represents the score and time remaining
 class Scoreboard {
   Integer home;
   Integer away;
@@ -55,6 +58,7 @@ class Scoreboard {
     this.time = time;
   }
 
+  //renders the score and time remaining
   WorldImage render() {
     WorldImage homeScore = new OverlayImage(
         new TextImage("Home: " + this.home.toString(), 10, Color.white),

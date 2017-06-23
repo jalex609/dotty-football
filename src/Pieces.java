@@ -6,6 +6,7 @@ import javalib.worldimages.OutlineMode;
 import javalib.worldimages.RectangleImage;
 import javalib.worldimages.WorldImage;
 
+//overall class for both players
 abstract class APlayer {
   Cell position;
 
@@ -13,7 +14,8 @@ abstract class APlayer {
     this.position = position;
   }
 
-  public WorldImage draw() {
+  //renders the offense and defense
+  public WorldImage render() {
     return new CircleImage(5, OutlineMode.SOLID, Color.red);
   }
 }
@@ -36,6 +38,7 @@ class Defense extends APlayer {
     super(position);
   }
 
+  //EFFECT: Moves the defenders towards the players
   void move(Cell offensivePosition) {
    double rand = Math.random();
    if (offensivePosition.x > this.position.x && !this.position.right.occupied && rand <=.5) {
