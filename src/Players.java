@@ -3,7 +3,7 @@ import javalib.impworld.*;
 import javalib.worldimages.*;
 import java.awt.Color;
 import tester.*;
-//add kicking, fix extra distance bug, clean up code and test and find more bugs
+//TODO fix extra distance bug, clean up code and test and find more bugs
 
 // class representing the football field itself
 class Field extends World {
@@ -339,7 +339,7 @@ class Field extends World {
         OutlineMode.SOLID, Color.BLACK), 0, 350);
     result.placeImageXY(new RectangleImage(2 * Field.IMG_SCALING, Field.IMG_SCALING,
         OutlineMode.SOLID, Color.BLACK), 800, 350);
-    result.placeImageXY(this.info.render(), 650, 350);
+    result.placeImageXY(this.info.render(this.homepossesion), 650, 350);
     result.placeImageXY(this.score.render(), 350, 350);
     return result;
   }

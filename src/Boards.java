@@ -20,17 +20,27 @@ class Infoboard {
     this.overhalfway = false;
   }
 
-  WorldImage render() {
+  WorldImage render(boolean homePossesion) {
+    String s = "";
     WorldImage down = new OverlayImage(
         new TextImage("Down: " + this.down.toString(), 10, Color.white),
         new RectangleImage(Field.IMG_SCALING, Field.IMG_SCALING, OutlineMode.SOLID, Color.black));
-    WorldImage fieldPosition = new OverlayImage(
-        new TextImage("Field Position: " + this.fieldposition.toString(), 10, Color.white),
-        new RectangleImage(Field.IMG_SCALING, Field.IMG_SCALING, OutlineMode.SOLID, Color.black));
+
     WorldImage yards = new OverlayImage(
         new TextImage("Yards To Go: " + this.yardstogo.toString(), 10, Color.white),
         new RectangleImage(Field.IMG_SCALING, Field.IMG_SCALING, OutlineMode.SOLID, Color.black));
+    if ((homePossesion && this.overhalfway) || (!homePossesion && !this.overhalfway)) {
+      s = " |-";
+      
+    }
+    else if ((homePossesion && !this.overhalfway) || (!homePossesion && this.overhalfway)) {
+      s = " -|";
+    }
+    WorldImage fieldPosition = new OverlayImage(
+        new TextImage("Field Position: " + this.fieldposition.toString() + s, 10, Color.white),
+        new RectangleImage(Field.IMG_SCALING, Field.IMG_SCALING, OutlineMode.SOLID, Color.black));
     return new BesideImage(down, fieldPosition, yards);
+
   }
 }
 
@@ -44,7 +54,7 @@ class Scoreboard {
     this.away = away;
     this.time = time;
   }
-  
+
   WorldImage render() {
     WorldImage homeScore = new OverlayImage(
         new TextImage("Home: " + this.home.toString(), 10, Color.white),
@@ -58,5 +68,3 @@ class Scoreboard {
     return new BesideImage(homeScore, time, awayScore);
   }
 }
-
-
