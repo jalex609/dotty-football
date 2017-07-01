@@ -6,7 +6,6 @@ import javalib.worldimages.*;
 import java.awt.Color;
 import java.util.List;
 
-import tester.*;
 
 // class representing the football field itself
 class Field extends World {
@@ -40,7 +39,7 @@ class Field extends World {
     this.info = new Infoboard(1, 20, 10); // home starts on the 20 for every
                                           // game
     this.firstDown = false;
-    this.score = new Scoreboard(0, 0, 1);
+    this.score = new Scoreboard(0, 0, 500);
   }
 
   // creates the initial game board
@@ -392,20 +391,4 @@ class Field extends World {
 
     return result;
   }
-}
-
-//TODO test 
-class ExamplesFootball {
-  Field f1;
-
-  void initField() {
-    f1 = new Field();
-  }
-
-  void testGame(Tester t) {
-    this.initField();
-    f1.bigBang(9 * Field.IMG_SCALING, 4 * Field.IMG_SCALING, .05);
-
-  }
-
 }
